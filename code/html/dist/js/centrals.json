@@ -1,0 +1,9 @@
+{
+    "Lima": {"Nombre": "Lima", "Potencia GFV": 3.0, "Potencia Inversor": 3, "Image": "Lima.jpg"},
+    "Arequipa": {"Nombre": "Arequipa", "Potencia GFV": 3.24, "Potencia Inversor": 3, "Image": "Arequipa.png"},
+    "Tacna": {"Nombre": "Tacna", "Potencia GFV": 3.24, "Potencia Inversor": 3, "Image": "Tacna.jpg"},
+    "Experimental": {"Nombre": "Experimental", "Potencia GFV": 3.0, "Potencia Inversor": 3, "Image": "ujaen.GIF"}
+}
+
+
+
