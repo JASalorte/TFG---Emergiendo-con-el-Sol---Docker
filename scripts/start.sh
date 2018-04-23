@@ -1,21 +1,21 @@
 #!/bin/bash
-if [ ! -f /home/admin/mysql-root-pw.txt ]; then
+if [ ! -f /home/admin/installation-complete ]; then
 
 #Generamos contrañas y las guardamos en el directorio de admin por si se necesitan consultar
 MYSQL_PASSWORD=`pwgen -c -n -1 12`
 MYSQL_MANAGER_PASSWORD=`pwgen -c -n -1 12`
 ADMIN_PASSWORD=`pwgen -c -n -1 12`
+ROOT_PASSWORD=`pwgen -c -n -1 12`
 
 echo mysql root password: $MYSQL_PASSWORD
-echo $MYSQL_PASSWORD > /home/admin/mysql-root-pw.txt
+echo mysql root password: $MYSQL_PASSWORD >> /home/admin/pw.txt
 echo mysql manager password: $MYSQL_MANAGER_PASSWORD
-echo $MYSQL_MANAGER_PASSWORD > /home/admin/mysql-manager-pw.txt
+echo mysql manager password: $MYSQL_MANAGER_PASSWORD >> /home/admin/pw.txt
 echo web admin password: $ADMIN_PASSWORD
-echo $ADMIN_PASSWORD > /home/admin/web-admin-pw.txt
-
-ROOT_PASSWORD=`pwgen -c -n -1 12`
+echo web admin password: $ADMIN_PASSWORD >> /home/admin/pw.txt
 echo "root:$ROOT_PASSWORD" | chpasswd 
 echo root password: $ROOT_PASSWORD
+echo root password: $ROOT_PASSWORD >> /home/admin/pw.txt
 
 #Inicialización para la base de datos
 /usr/bin/mysql_install_db > /dev/null
@@ -46,24 +46,9 @@ sed -i '/*password = ""/c	char *password = "'$MYSQL_MANAGER_PASSWORD'";' /home/a
 g++ -o /home/admin/Central/pro $(mysql_config --cflags) /home/admin/Central/main.cpp $(mysql_config --libs) > /dev/null
 chmod 777 /home/admin/Central/pro
 
-else
-
-#En caso de que el contenedor simplemente se esté reiniciando, ejecutar estos comandos
-MYSQL_PASSWORD=`cat /home/admin/mysql-root-pw.txt`
-MYSQL_MANAGER_PASSWORD=`cat /home/admin/mysql-manager-pw.txt`
-ADMIN_PASSWORD=`cat /home/admin/web-admin-pw.txt`
-
-sed -i '/$dbname/c $dbname = "EmergiendoConElSol";' /var/www/html/mysqlData.php
-sed -i '/$username/c $username = "gestor";' /var/www/html/mysqlData.php
-sed -i '/$password/c $password = "'$MYSQL_MANAGER_PASSWORD'";' /var/www/html/mysqlData.php
-
-echo mysql root password: $MYSQL_PASSWORD
-echo mysql manager password: $MYSQL_MANAGER_PASSWORD
-echo web admin password: $ADMIN_PASSWORD 
+touch /home/admin/installation-complete
 
 fi
-
-#mysql -u root --password=$MYSQL_PASSWORD EmergiendoConElSol -e "SET GLOBAL event_scheduler = ON"
 
 PUBLIC_IP=`curl ipinfo.io/ip`
 
