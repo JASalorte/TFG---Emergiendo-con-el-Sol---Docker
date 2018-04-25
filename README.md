@@ -40,8 +40,4 @@ donde nos encargaremos de la monitorización y  visualización de la generación
 
 ## Instalación
 
-Para su instalación se puede seguir los pasos que hay en la documentación del proyecto que ha sido adjuntada a partir del Anexo I.
-
-## Licencia
-
-[GPLv3](http://www.gnu.org/licenses/licenses.html#GPL)
+Para su instalación dirijase al archivo Despliege Docker.md en el directorio raiz. 
