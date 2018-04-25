@@ -31,7 +31,7 @@ mysql -u root --password=$MYSQL_PASSWORD -e "CREATE DATABASE EmergiendoConElSol;
  FLUSH PRIVILEGES;" 
 
 #Creamos las tablas que utilizará el proyecto Emergiendo con el Sol y añadimos un administrador para la página web
-mysql -u root --password=$MYSQL_PASSWORD EmergiendoConElSol < mysqlScripts.sql
+mysql -u root --password=$MYSQL_PASSWORD EmergiendoConElSol < /home/admin/mysqlScripts.sql
 mysql -u root --password=$MYSQL_PASSWORD EmergiendoConElSol -e "INSERT INTO users (username, password) VALUES ('admin', SHA1('$ADMIN_PASSWORD'))"
 
 sed -i '/$dbname/c $dbname = "EmergiendoConElSol";' /var/www/html/mysqlData.php
