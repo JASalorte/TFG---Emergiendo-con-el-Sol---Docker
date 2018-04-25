@@ -58,8 +58,9 @@ RUN ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
 ###	Configuración de la Base de datos
 #############
 
-ADD ./scripts/mysqlScript.sql /mysqlScripts.sql
+ADD ./scripts/mysqlScript.sql /home/admin/mysqlScripts.sql
 ADD ./scripts/fix-permissions.sh /fix-permissions.sh
+RUN chmod 333 /fix-permissions.sh
 RUN ./fix-permissions.sh /var/lib/mysql/   && \
     ./fix-permissions.sh /var/log/mariadb/ && \
     ./fix-permissions.sh /var/run/
@@ -123,6 +124,9 @@ EXPOSE 80 22
 ###	 Iniciar el script start.sh 
 #############
 
+ADD ./scripts/extract.sh /home/admin/extract.sh
+RUN chmod 666 /home/admin/extract.sh
+
 #db
 #home
 #html
@@ -130,7 +134,7 @@ EXPOSE 80 22
 
 VOLUME /var/lib/mysql 
 VOLUME /home
-VOLUME /var/www/html/JSON
+VOLUME /var/www/html
 VOLUME /etc
 
 CMD ["/bin/bash", "/start.sh"]
