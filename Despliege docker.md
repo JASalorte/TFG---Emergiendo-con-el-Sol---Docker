@@ -111,7 +111,7 @@ docker system df -v
 Buscamos el tamaño del volumen "home" (o el nombre que le hayamos puesto) y si se pasa de unos límites que consideremos aceptables, deberíamos pasar los archivos a un almacenamiento externo, para ello solo tendremos que ejecutar este script que se encuentra en el mismo directorio que el Dockerfile.
 
 ~~~bash
-./BackupFile.sh IDContenedor /DirectorioDelHostDondeSeGuardaránLosDatos
+./BackupFiles.sh IDContenedor /DirectorioDelHostDondeSeGuardaránLosDatos
 ~~~ 
 
 
